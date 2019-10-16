@@ -1,12 +1,7 @@
 FROM golang:1.12.6-alpine as build
 RUN apk add git
 WORKDIR /natsconnector
-COPY ./config .
-COPY ./nats .
-COPY go.mod . 
-COPY go.sum . 
-COPY main.go .
-RUN go get -d -v ./...
+COPY * ./
 RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -ldflags="-w -s" -o /usr/bin/producer
 
 
