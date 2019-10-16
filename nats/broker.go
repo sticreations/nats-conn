@@ -17,21 +17,23 @@ const queueGroup = "openfaas_nats_worker_group"
 const clientName = "openfaas_connector"
 
 type BrokerConfig struct {
-	Host        string
-	ConnTimeout time.Duration
-	Tracer      opentracing.Tracer
-	GatewayURL  string
+	Host               string
+	ConnTimeout        time.Duration
+	Tracer             opentracing.Tracer
+	GatewayURL         string
+	ConcurrentRequests int
 }
 
 type broker struct {
-	client     *nats.Conn
-	tracer     opentracing.Tracer
-	gatewayURL string
+	client              *nats.Conn
+	tracer              opentracing.Tracer
+	gatewayURL          string
+	concurrentSemaphore chan bool
 }
 
 func NewBroker(config BrokerConfig) *broker {
-	broker := &broker{}
-
+	broker := &broker{tracer: config.Tracer}
+	broker.concurrentSemaphore = make(chan bool, config.ConcurrentRequests)
 	brokerURL := "nats://" + config.Host + ":4222"
 	for {
 		client, err := nats.Connect(brokerURL, nats.Timeout(config.ConnTimeout), nats.Name(clientName))
@@ -60,9 +62,8 @@ func (b *broker) Subscribe(controller *types.Controller, topics []string) {
 		log.Printf("Binding to topic: %v", topic)
 		b.client.QueueSubscribe(topic, queueGroup, func(m *nats.Msg) {
 
-			log.Printf("Received topic: %s, message: %s", m.Subject, string(m.Data))
+			//log.Printf("Received topic: %s, message: %s", m.Subject, string(m.Data))
 			t := not.NewTraceMsg(m)
-
 			sc, err := b.tracer.Extract(opentracing.Binary, t)
 			if err != nil {
 				log.Printf("Could not Extract Opentracing, continuing with normal Message : %v", err)
@@ -71,7 +72,9 @@ func (b *broker) Subscribe(controller *types.Controller, topics []string) {
 			}
 			childSpan := b.tracer.StartSpan("Nats-Event", opentracing.ChildOf(sc))
 			defer childSpan.Finish()
-			go b.handleMessageWithTracing(m.Subject, m.Data, controller, childSpan)
+
+			data := []byte(t.String())
+			go b.handleMessageWithTracing(m.Subject, data, controller, childSpan)
 
 		})
 	}

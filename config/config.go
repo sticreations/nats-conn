@@ -5,17 +5,19 @@ package config
 import (
 	"log"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
 
 type Config struct {
-	GatewayURL      string
-	UpstreamTimeout time.Duration
-	Topics          []string
-	PrintResponse   bool
-	RebuildInterval time.Duration
-	Broker          string
+	GatewayURL         string
+	ConcurrentRequests int
+	UpstreamTimeout    time.Duration
+	Topics             []string
+	PrintResponse      bool
+	RebuildInterval    time.Duration
+	Broker             string
 }
 
 func Get() Config {
@@ -63,12 +65,21 @@ func Get() Config {
 		printResponse = (val == "1" || val == "true")
 	}
 
+	concurrentRequests := 40
+	if val, exists := os.LookupEnv("concurrent_requests"); exists {
+		concurrent, err := strconv.Atoi(val)
+		if err == nil {
+			concurrentRequests = concurrent
+		}
+	}
+
 	return Config{
-		GatewayURL:      gatewayURL,
-		UpstreamTimeout: upstreamTimeout,
-		Topics:          topics,
-		RebuildInterval: rebuildInterval,
-		Broker:          broker,
-		PrintResponse:   printResponse,
+		GatewayURL:         gatewayURL,
+		UpstreamTimeout:    upstreamTimeout,
+		Topics:             topics,
+		RebuildInterval:    rebuildInterval,
+		Broker:             broker,
+		PrintResponse:      printResponse,
+		ConcurrentRequests: concurrentRequests,
 	}
 }

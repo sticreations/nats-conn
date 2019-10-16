@@ -1,7 +1,7 @@
-FROM golang:1.12.6-alpine as build
-RUN apk add git
+FROM golang:latest as build
+ENV GO111MODULE=on
 WORKDIR /natsconnector
-COPY * ./
+COPY . . 
 RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -ldflags="-w -s" -o /usr/bin/producer
 
 

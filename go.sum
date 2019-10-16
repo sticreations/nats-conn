@@ -5,6 +5,8 @@ github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/golang/protobuf v1.3.1/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/golang/protobuf v1.3.2 h1:6nsPYzhq5kReh6QImI3k5qWzO4PEbvbIW2cwSfR/6xs=
 github.com/golang/protobuf v1.3.2/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
+github.com/gorilla/mux v1.7.3 h1:gnP5JzjVOuiZD07fKKToCAOjS0yOpj/qPETTXCCS6hw=
+github.com/gorilla/mux v1.7.3/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=
 github.com/nats-io/gnatsd v1.4.1/go.mod h1:nqco77VO78hLCJpIcVfygDP2rPGfsEHkGTUk94uh5DQ=
 github.com/nats-io/go-nats v1.7.2 h1:cJujlwCYR8iMz5ofZSD/p2WLW8FabhkQ2lIEVbSvNSA=
 github.com/nats-io/go-nats v1.7.2/go.mod h1:+t7RHT5ApZebkrQdnn6AhQJmhJJiKAvJUio1PiiCtj0=
@@ -24,6 +26,7 @@ github.com/nats-io/nuid v1.0.1/go.mod h1:19wcPz3Ph3q0Jbyiqsd0kePYG7A95tJPxeL+1OS
 github.com/openfaas-incubator/connector-sdk v0.0.0-20190611163053-d4baf95d4c62/go.mod h1:jHCtd1HCZwhuwdPy4OB8CQU7ZqzxBdWNhIhH/khCJqQ=
 github.com/openfaas-incubator/connector-sdk v0.0.0-20190923203533-47d2959df0a5 h1:dqqzKXBxvWOsvst1d4kvuYkhnk7/2NHAROvivInuo2Y=
 github.com/openfaas-incubator/connector-sdk v0.0.0-20190923203533-47d2959df0a5/go.mod h1:jHCtd1HCZwhuwdPy4OB8CQU7ZqzxBdWNhIhH/khCJqQ=
+github.com/openfaas-incubator/connector-sdk v0.0.0-20191016103615-1cf0f49095a2 h1:jTBgDY+Ax/HLapGri0YHwL7JYpN2dZ9OaF2gFfk/m58=
 github.com/openfaas-incubator/nats-connector v0.0.0-20190708162743-9ad8cea160ef h1:D1QAHXplcTqhUTfxesOVDAzvcjS/cO7K87nMZ0olTGY=
 github.com/openfaas-incubator/nats-connector v0.0.0-20190708162743-9ad8cea160ef/go.mod h1:cXCU0G6/MxkACFmI/QLbw0GOhGarvbRDtR2Tf1bkkNg=
 github.com/openfaas/faas v0.0.0-20181122165013-495cf9e7aff0/go.mod h1:E0m2rLup0Vvxg53BKxGgaYAGcZa3Xl+vvL7vSi5yQ14=
@@ -36,6 +39,8 @@ github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/sticreations/nats-connector v0.0.0-20191016093917-8cfe99067217 h1:F1RxujfP0nZzg519wPh8/9XpnGAwOjA7RG0HPtkx/CY=
+github.com/sticreations/nats-connector v0.0.0-20191016093917-8cfe99067217/go.mod h1:ZVJpIl6sbdi3xHkKti7uquml1QP/Sg0VqoxlnH0qNwE=
 github.com/sticreations/not.go v0.0.0-20191015195902-e37b95d4ddec h1:ajK1ByPiwKEtAz0WThkAS8LY8FBsok4KRaDALpzx6HY=
 github.com/sticreations/not.go v0.0.0-20191015195902-e37b95d4ddec/go.mod h1:mj2Cf8tGyX0TkL5N2ZYhdH+PGgnKmLlfLz35BZmpx48=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
