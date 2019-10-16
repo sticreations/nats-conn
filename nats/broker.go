@@ -4,7 +4,6 @@ package nats
 
 import (
 	"context"
-	"fmt"
 	nats "github.com/nats-io/nats.go"
 	"github.com/openfaas-incubator/connector-sdk/types"
 	"github.com/opentracing/opentracing-go"
@@ -72,7 +71,7 @@ func (b *broker) Subscribe(controller *types.Controller, topics []string) {
 			}
 			childSpan := b.tracer.StartSpan("Nats-Event", opentracing.ChildOf(sc))
 			defer childSpan.Finish()
-			go b.handleMessageWithTracing(m.Subject, m.Data, controller, childspan)
+			go b.handleMessageWithTracing(m.Subject, m.Data, controller, childSpan)
 
 		})
 	}
@@ -87,9 +86,7 @@ func (b *broker) handleMessageWithoutTracing(subject string, data []byte, contro
 }
 
 func (b *broker) handleMessageWithTracing(subject string, data []byte, controller *types.Controller, span opentracing.Span) {
-	url := fmt.Sprintf("%s/%s/%s", b.gatewayURL, "function", subject)
 	var ctx context.Context
 	ctx = opentracing.ContextWithSpan(ctx, span)
 	controller.InvokeWithContext(ctx, subject, &data)
-	// Not possible to map subject to Function right now :()
 }
